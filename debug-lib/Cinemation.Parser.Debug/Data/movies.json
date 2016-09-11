@@ -1,0 +1,52 @@
+﻿[
+  {
+    "file_name": "Now You See Me 2 (2016) English BrRip 720p x264",
+    "movie_title": "Now You See Me 2",
+    "movie_year": 2016,
+    "video_source": "BrRip",
+    "video_resolution": "720p",
+    "video_codec": "x264"
+  },
+  {
+    "file_name": "Spectre 2015 1080p BluRay x264 DTS-JYK",
+    "movie_title": "Spectre",
+    "movie_year": 2015,  
+    "audio_channel": "DTS", 
+    "video_source": "BluRay",
+    "video_resolution": "1080p",
+    "video_codec": "x264" 
+  },
+  {
+    "file_name": "Spectre.2015.720p.BRRip.x264.AAC-ETRG",
+    "movie_title": "Spectre",
+    "movie_year": 2015,
+    "audio_codec": "AAC",
+    "video_source": "BRRip",
+    "video_resolution": "720p",
+    "video_codec": "x264"
+  },
+  {
+    "file_name": "The Fast and the Furious Tokyo Drift (2006) 720p BrRip x264 - 75",
+    "movie_title": "The Fast and the Furious Tokyo Drift",
+    "movie_year": 2006,
+    "video_source": "BrRip",
+    "video_resolution": "720p",
+    "video_codec": "x264"
+  },
+  {
+    "file_name": "The Fast and the Furious (2001) 1080p BrRip x264 - 1.40GB - YIFY",
+    "movie_title": "The Fast and the Furious",
+    "movie_year": 2001,
+    "video_source": "BrRip",
+    "video_resolution": "1080p",
+    "video_codec": "x264"
+  },
+  {
+    "file_name": "Suicide Squad 2016 English HD-CAM - x264 - AAC - Zi$t",
+    "movie_title": "Suicide Squad",
+    "movie_year": 2016,
+    "audio_codec": "AAC",
+    "video_source": "HD-CAM",
+    "video_codec": "x264"
+  }
+]

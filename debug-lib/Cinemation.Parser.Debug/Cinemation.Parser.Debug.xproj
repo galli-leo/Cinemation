@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>38b8a3c7-fa6e-4b1a-9e6b-169cbebc2627</ProjectGuid>
-    <RootNamespace>Cinemation.Parser</RootNamespace>
+    <ProjectGuid>8c0c56be-154b-484f-baa7-b28503dac74c</ProjectGuid>
+    <RootNamespace>Cinemation.Parser.Debug</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
