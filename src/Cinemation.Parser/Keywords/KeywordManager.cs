@@ -19,7 +19,7 @@ namespace Cinemation.Parser.Keywords
 
             AddKeys(ElementCategory.AudioChannel, new []
             {
-                "2.0CH", "2CH", "5.1", "5.1CH", "DTS", "DTS-ES", "DTS5.1", "TRUEHD5.1"
+                "2.0", "2.0CH", "2CH", "5.1", "5.1CH", "DTS", "DTS-ES", "DTS5.1", "TRUEHD5.1"
             });
 
             AddKeys(ElementCategory.AudioCodec, new []

@@ -9,7 +9,6 @@ namespace Cinemation.Parser
         {
             ' ',
             '_',
-            '-',
             '.',
             '&',
             '+',

@@ -10,11 +10,11 @@
   {
     "file_name": "Spectre 2015 1080p BluRay x264 DTS-JYK",
     "movie_title": "Spectre",
-    "movie_year": 2015,  
-    "audio_channel": "DTS", 
+    "movie_year": 2015,
+    "audio_channel": "DTS",
     "video_source": "BluRay",
     "video_resolution": "1080p",
-    "video_codec": "x264" 
+    "video_codec": "x264"
   },
   {
     "file_name": "Spectre.2015.720p.BRRip.x264.AAC-ETRG",
@@ -48,5 +48,33 @@
     "audio_codec": "AAC",
     "video_source": "HD-CAM",
     "video_codec": "x264"
+  },
+  {
+    "file_name": "X-Men Apocalypse 2016 720p BRRip X264 AC3-EVO",
+    "movie_title": "X-Men Apocalypse",
+    "movie_year": 2016,
+    "audio_codec": "AC3",
+    "video_source": "BRRip",
+    "video_resolution": "720p",
+    "video_codec": "X264"
+  },
+  {
+    "file_name": "X-Men.Apocalypse.2016.BluRay.720p.MicroHD.AAC.2.0.x264-Nightripper",
+    "movie_title": "X-Men Apocalypse",
+    "movie_year": 2016,
+    "audio_channel": "2.0",
+    "audio_codec": "AAC",
+    "video_source": "BluRay",
+    "video_resolution": "720p",
+    "video_codec": "x264"
+  },
+  {
+    "file_name": "My.Man.Is.a.Loser.2014.720p.BluRay.H264.AAC-RARBG",
+    "movie_title": "My Man Is a Loser",
+    "movie_year": 2014,
+    "audio_codec": "AAC",
+    "video_source": "BluRay",
+    "video_resolution": "720p",
+    "video_codec": "H264"
   }
 ]
