@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "debug-lib", "debug-lib", "{
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cinemation.Parser.Debug", "debug-lib\Cinemation.Parser.Debug\Cinemation.Parser.Debug.xproj", "{8C0C56BE-154B-484F-BAA7-B28503DAC74C}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cinemation.Core", "src\Cinemation.Core\Cinemation.Core.xproj", "{F917AE3E-567E-442F-BEDA-9B7DEA33D346}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{8C0C56BE-154B-484F-BAA7-B28503DAC74C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C0C56BE-154B-484F-BAA7-B28503DAC74C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C0C56BE-154B-484F-BAA7-B28503DAC74C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F917AE3E-567E-442F-BEDA-9B7DEA33D346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F917AE3E-567E-442F-BEDA-9B7DEA33D346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F917AE3E-567E-442F-BEDA-9B7DEA33D346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F917AE3E-567E-442F-BEDA-9B7DEA33D346}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +43,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{38B8A3C7-FA6E-4B1A-9E6B-169CBEBC2627} = {D944798E-D6FA-4862-B17B-0A4F6929B062}
 		{8C0C56BE-154B-484F-BAA7-B28503DAC74C} = {DB9C1418-B9DB-4BF1-8A6D-2365840363E2}
+		{F917AE3E-567E-442F-BEDA-9B7DEA33D346} = {D944798E-D6FA-4862-B17B-0A4F6929B062}
 	EndGlobalSection
 EndGlobal
