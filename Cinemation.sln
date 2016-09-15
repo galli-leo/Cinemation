@@ -18,6 +18,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cinemation.Parser.Debug", "
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cinemation.Core", "src\Cinemation.Core\Cinemation.Core.xproj", "{F917AE3E-567E-442F-BEDA-9B7DEA33D346}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cinemation.Core.Debug", "debug-lib\Cinemation.Core.Debug\Cinemation.Core.Debug.xproj", "{709EE3EA-A75F-4DE8-9A7D-401C6C48EF26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{F917AE3E-567E-442F-BEDA-9B7DEA33D346}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F917AE3E-567E-442F-BEDA-9B7DEA33D346}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F917AE3E-567E-442F-BEDA-9B7DEA33D346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709EE3EA-A75F-4DE8-9A7D-401C6C48EF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709EE3EA-A75F-4DE8-9A7D-401C6C48EF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709EE3EA-A75F-4DE8-9A7D-401C6C48EF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709EE3EA-A75F-4DE8-9A7D-401C6C48EF26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +50,6 @@ Global
 		{38B8A3C7-FA6E-4B1A-9E6B-169CBEBC2627} = {D944798E-D6FA-4862-B17B-0A4F6929B062}
 		{8C0C56BE-154B-484F-BAA7-B28503DAC74C} = {DB9C1418-B9DB-4BF1-8A6D-2365840363E2}
 		{F917AE3E-567E-442F-BEDA-9B7DEA33D346} = {D944798E-D6FA-4862-B17B-0A4F6929B062}
+		{709EE3EA-A75F-4DE8-9A7D-401C6C48EF26} = {DB9C1418-B9DB-4BF1-8A6D-2365840363E2}
 	EndGlobalSection
 EndGlobal

@@ -1,15 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Cinemation.Core.Indexers.Torrent;
+using NLog;
 
 namespace Cinemation.Core.Indexers
 {
-    internal abstract class Indexer
+    public class Indexer
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// Gets the base <see cref="Uri"/>.
-        /// </summary>
-        /// <returns>Returns the base <see cref="Uri"/>.</returns>
-        public abstract Uri GetBaseUri();
+        private static readonly List<TorrentIndexer> TorrentIndexers;
 
+        static Indexer()
+        {
+            TorrentIndexers = new List<TorrentIndexer>();
+            
+            foreach (var type in typeof(Indexer).GetTypeInfo().Assembly.GetTypes())
+            {
+                if (type.GetTypeInfo().IsSubclassOf(typeof(TorrentIndexer)))
+                {
+                    TorrentIndexers.Add((TorrentIndexer) Activator.CreateInstance(type));
+                }
+            }
+        }
+
+        public static void SearchTorrents(string query)
+        {
+            if (Logger.IsDebugEnabled)
+                Logger.Debug($"Searching torrents with the query: {query}");
+
+            foreach (var torrentIndexer in TorrentIndexers)
+            {
+                
+            }
+        }
     }
 }

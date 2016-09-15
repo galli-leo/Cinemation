@@ -3,7 +3,9 @@
   "buildOptions": {
     "debugType": "portable"
   },
-  "dependencies": {},
+  "dependencies": {
+    "NLog": "4.4.0-betaV15"
+  },
   "frameworks": {
     "netstandard1.6": {
       "dependencies": {
