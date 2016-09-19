@@ -40,12 +40,17 @@ namespace Cinemation.Core.Indexers
 
             await Task.WhenAll(searchTasks);
 
+            var finalTorrents = new List<TorrentData>();
+
+            // TODO: Filter out duplicates.. but how? (Maybe match torrent file names??)
             foreach (var torrents in searchTasks.Select(x => x.Result))
             {
-                foreach (var torrent in torrents)
-                {
-                    Logger.Debug(torrent.Title);
-                }
+                finalTorrents.AddRange(torrents);
+            }
+
+            foreach (var torrent in finalTorrents)
+            {
+                Logger.Debug(torrent.Title);
             }
         }
     }

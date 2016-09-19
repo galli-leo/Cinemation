@@ -9,6 +9,11 @@
         public string Title { get; set; }
 
         /// <summary>
+        ///     The torrent magnet uri.
+        /// </summary>
+        public string Magnet { get; set; }
+
+        /// <summary>
         ///     Torrent seeders count.
         /// </summary>
         public int Seeds { get; set; }

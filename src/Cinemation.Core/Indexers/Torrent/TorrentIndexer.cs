@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NLog;
@@ -11,33 +12,31 @@ namespace Cinemation.Core.Indexers.Torrent
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         
-        protected TorrentIndexer(bool enabled = true)
+        protected TorrentIndexer(string name, bool enabled = true)
         {
+            Name = name;
             Enabled = enabled;
             HttpClient = new HttpClient();
         }
+
+        public string Name { get; }
 
         public bool Enabled { get; }
 
         public HttpClient HttpClient;
 
-        /// <summary>
-        ///     Class name of the current indexer.
-        /// </summary>
-        private string IndexerName => GetType().Name;
-
         public Task<List<TorrentData>> SearchByMovieTitle(string query)
         {
             return SearchAsync(new SearchData
             {
-                MovieName = query
+                MovieName = WebUtility.UrlEncode(query)
             });
         }
 
         private async Task<List<TorrentData>> SearchAsync(SearchData searchData)
         {
             if (Logger.IsDebugEnabled)
-                Logger.Debug($"[{IndexerName}]: Searching '{searchData.MovieName}'.");
+                Logger.Debug($"[{Name}]: Searching '{searchData.MovieName}'.");
 
             var stopwatch = Stopwatch.StartNew();
             var result = new List<TorrentData>(0);
@@ -48,11 +47,11 @@ namespace Cinemation.Core.Indexers.Torrent
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, $"[{IndexerName}]: Threw an exception while performing a search.");
+                Logger.Error(ex, $"[{Name}]: Threw an exception while performing a search.");
             }
 
             if (Logger.IsDebugEnabled)
-                Logger.Debug($"[{IndexerName}]: Found '{result.Count}' torrents in {stopwatch.ElapsedMilliseconds}ms.");
+                Logger.Debug($"[{Name}]: Found '{result.Count}' torrents in {stopwatch.ElapsedMilliseconds}ms.");
 
             return result;
         }

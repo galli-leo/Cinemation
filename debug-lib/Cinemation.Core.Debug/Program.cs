@@ -28,6 +28,7 @@ namespace Cinemation.Core.Debug
         private static async Task Run(string[] args)
         {
             await Indexer.SearchTorrents("Furious");
+            await Indexer.SearchTorrents("Spectre");
         }
     }
 }
