@@ -11,7 +11,7 @@
         /// <summary>
         ///     Torrent seeders count.
         /// </summary>
-        public int Seeders { get; set; }
+        public int Seeds { get; set; }
 
         /// <summary>
         ///     Torrent peer count.

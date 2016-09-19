@@ -17,27 +17,36 @@ namespace Cinemation.Core.Indexers
         static Indexer()
         {
             TorrentIndexers = new List<TorrentIndexer>();
-            
+
             foreach (var type in typeof(Indexer).GetTypeInfo().Assembly.GetTypes())
             {
-                if (type.GetTypeInfo().IsSubclassOf(typeof(TorrentIndexer)))
-                {
-                    TorrentIndexers.Add((TorrentIndexer) Activator.CreateInstance(type));
-                }
+                if (!type.GetTypeInfo().IsSubclassOf(typeof(TorrentIndexer))) continue;
+
+                var torrentIndexer = (TorrentIndexer)Activator.CreateInstance(type);
+
+                if (torrentIndexer.Enabled)
+                    TorrentIndexers.Add(torrentIndexer);
             }
         }
 
-        public static void SearchTorrents(string query)
+        public static async Task SearchTorrents(string query)
         {
             if (Logger.IsDebugEnabled)
-                Logger.Debug($"Searching torrents with the query: {query}");
+                Logger.Debug($"Searching torrents with the query: '{query}'.");
 
             var searchTasks = TorrentIndexers
-                .Select(torrentIndexer => torrentIndexer.Search(query))
-                .Cast<Task>()
+                .Select(torrentIndexer => torrentIndexer.SearchByMovieTitle(query))
                 .ToArray();
 
-            Task.WaitAll(searchTasks);
+            await Task.WhenAll(searchTasks);
+
+            foreach (var torrents in searchTasks.Select(x => x.Result))
+            {
+                foreach (var torrent in torrents)
+                {
+                    Logger.Debug(torrent.Title);
+                }
+            }
         }
     }
 }

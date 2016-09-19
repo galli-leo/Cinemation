@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Cinemation.Core.Indexers;
 using NLog;
 using NLog.Config;
@@ -17,10 +18,16 @@ namespace Cinemation.Core.Debug
 
             Logger.Warn("Booting Cinemation.Core.Debug");
 
-            Indexer.SearchTorrents("Spectre");
-
+            Run(args).GetAwaiter().GetResult();
+            
             Logger.Warn("Shutting down");
+
             Console.ReadLine();
+        }
+
+        private static async Task Run(string[] args)
+        {
+            await Indexer.SearchTorrents("Furious");
         }
     }
 }
