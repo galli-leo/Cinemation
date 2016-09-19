@@ -4,6 +4,7 @@
     "debugType": "portable"
   },
   "dependencies": {
+    "Newtonsoft.Json": "9.0.1",
     "NLog": "4.4.0-betaV15"
   },
   "frameworks": {

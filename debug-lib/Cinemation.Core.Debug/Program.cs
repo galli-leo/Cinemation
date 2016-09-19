@@ -17,7 +17,7 @@ namespace Cinemation.Core.Debug
 
             Logger.Warn("Booting Cinemation.Core.Debug");
 
-            Indexer.SearchTorrents("Spectre (2016)");
+            Indexer.SearchTorrents("Spectre");
 
             Logger.Warn("Shutting down");
             Console.ReadLine();
