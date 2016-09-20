@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/xy3ldosh58v7y5ea?svg=true)](https://ci.appveyor.com/project/Cinemation/cinemation)
 
-Cinemation ("CMT") aims to make it easier to download movies. You can add movies to a "wanted" list and CMT will keep looking for it on the enabled indexers. Once the correct file has been found it will download it. 
+Cinemation ("CMT") aims to make it easier to download movies. You can add movies to a "wanted" list and CMT will keep looking for it on the enabled [indexers](#Indexers). Once the correct file has been found it will download it. 
 
 It's also possible to download a lower quality version first (720p) and then automatically upgrade to a higher quality (1080p). After downloading the higher quality version it will remove the old one.
 
