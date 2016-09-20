@@ -27,8 +27,19 @@ namespace Cinemation.Core.Debug
 
         private static async Task Run(string[] args)
         {
-            await Indexer.SearchTorrents("Furious");
-            await Indexer.SearchTorrents("Spectre");
+            await Indexer.SearchTorrents(new SearchData
+            {
+                MovieName = "The Fast and the Furious",
+                MovieYear = 2001,
+                ImdbCode = "tt0232500"
+            });
+
+            await Indexer.SearchTorrents(new SearchData
+            {
+                MovieName = "Spectre",
+                MovieYear = 2015,
+                ImdbCode = "tt2379713"
+            });
         }
     }
 }

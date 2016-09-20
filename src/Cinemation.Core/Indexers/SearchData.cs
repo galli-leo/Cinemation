@@ -19,5 +19,10 @@
         /// </summary>
         public string ImdbCode { get; set; }
 
+        /// <summary>
+        ///     Determines whether an <see cref="ImdbCode"/> is set.
+        /// </summary>
+        public bool HasImdbCode => !string.IsNullOrEmpty(ImdbCode);
+
     }
 }

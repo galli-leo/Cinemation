@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Cinemation.Core.Indexers.Torrent.Indexers
 {
-    // TODO: Support imdb id.
     public class RarBgIndexer : TorrentIndexer
     {
         private const string Endpoint = "https://torrentapi.org/pubapi_v2.php";
@@ -22,18 +21,9 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
 
         private bool TokenIsExpired => string.IsNullOrEmpty(Token) || TokenExpiry < DateTime.UtcNow;
 
-        private async Task RefreshTokenAsync()
+        protected override void Configure(IndexerConfigurator config)
         {
-            var response = await HttpClient.GetStringAsync($"{Endpoint}?get_token=get_token");
-            var jToken = JsonConvert.DeserializeObject<JToken>(response);
-
-            var token = jToken.Value<string>("token");
-
-            if (string.IsNullOrEmpty(token))
-                throw new Exception("Received an invalid token.");
-
-            Token = token;
-            TokenExpiry = DateTime.UtcNow.AddMinutes(14);
+            
         }
 
         protected override async Task<List<TorrentData>> PerformSearchAsync(SearchData searchData)
@@ -42,7 +32,7 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
                 await RefreshTokenAsync();
 
             var torrentsData = new List<TorrentData>();
-            var response = await HttpClient.GetStringAsync($"{Endpoint}?mode=search&category=movies&format=json_extended&search_string={searchData.MovieName}&token={Token}");
+            var response = await HttpClient.GetStringAsync(GetSearchUrl(searchData));
 
             var jToken = JsonConvert.DeserializeObject<JToken>(response);
             var torrents = jToken.Value<JArray>("torrent_results");
@@ -61,6 +51,36 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
             );
 
             return torrentsData;
+        }
+
+        private string GetSearchUrl(SearchData searchData)
+        {
+            var searchUrl = $"{Endpoint}?mode=search&category=movies&format=json_extended&token={Token}";
+
+            if (searchData.HasImdbCode)
+            {
+                searchUrl += $"&search_imdb={searchData.ImdbCode}";
+            }
+            else
+            {
+                searchUrl += $"&search_string={searchData.MovieName}";
+            }
+
+            return searchUrl;
+        }
+
+        private async Task RefreshTokenAsync()
+        {
+            var response = await HttpClient.GetStringAsync($"{Endpoint}?get_token=get_token");
+            var jToken = JsonConvert.DeserializeObject<JToken>(response);
+
+            var token = jToken.Value<string>("token");
+
+            if (string.IsNullOrEmpty(token))
+                throw new Exception("Received an invalid token.");
+
+            Token = token;
+            TokenExpiry = DateTime.UtcNow.AddMinutes(14);
         }
     }
 }

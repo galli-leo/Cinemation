@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using Cinemation.Core.Indexers.Torrent;
@@ -29,13 +30,23 @@ namespace Cinemation.Core.Indexers
             }
         }
 
-        public static async Task SearchTorrents(string query)
+        public static Task SearchTorrents(string query)
         {
+            return SearchTorrents(new SearchData
+            {
+                MovieName = query
+            });
+        }
+
+        public static async Task SearchTorrents(SearchData searchData)
+        {
+            searchData.MovieName = WebUtility.UrlEncode(searchData.MovieName);
+
             if (Logger.IsDebugEnabled)
-                Logger.Debug($"Searching torrents with the query: '{query}'.");
+                Logger.Debug($"Searching torrents for the movie: '{searchData.MovieName}'.");
 
             var searchTasks = TorrentIndexers
-                .Select(torrentIndexer => torrentIndexer.SearchByMovieTitle(query))
+                .Select(torrentIndexer => torrentIndexer.SearchAsync(searchData))
                 .ToArray();
 
             await Task.WhenAll(searchTasks);
@@ -50,7 +61,7 @@ namespace Cinemation.Core.Indexers
 
             foreach (var torrent in finalTorrents)
             {
-                Logger.Debug(torrent.Title);
+                Logger.Debug($"[{torrent.IndexerMetaData.Name}]: {torrent.Title}");
             }
         }
     }

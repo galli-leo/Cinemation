@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Cinemation.Core.Indexers.Torrent.Indexers
 {
-    // TODO: Support imdb id.
     public class YtsAgIndexer : TorrentIndexer
     {
         private const string EndpointMovies = "https://yts.ag/api/v2/list_movies.json";
@@ -17,11 +16,18 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
         public YtsAgIndexer() : base("YtsAg")
         {
         }
-        
+
+        protected override void Configure(IndexerConfigurator config)
+        {
+            
+        }
+
         protected override async Task<List<TorrentData>> PerformSearchAsync(SearchData searchData)
         {
+            var queryTerm = searchData.HasImdbCode ? searchData.ImdbCode : searchData.MovieName;
+
             var torrentsData = new List<TorrentData>();
-            var response = await HttpClient.GetStringAsync($"{EndpointMovies}?query_term={searchData.MovieName}");
+            var response = await HttpClient.GetStringAsync($"{EndpointMovies}?query_term={queryTerm}");
 
             var jToken = JsonConvert.DeserializeObject<JToken>(response);
             var movies = jToken.Value<JToken>("data")?.Value<JArray>("movies");

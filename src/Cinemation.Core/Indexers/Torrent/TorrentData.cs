@@ -28,5 +28,10 @@
         /// </summary>
         public long Size { get; set; }
 
+        /// <summary>
+        ///     MetaData about the 
+        /// </summary>
+        public IndexerMetaData IndexerMetaData;
+
     }
 }

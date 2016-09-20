@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NLog;
@@ -11,32 +10,45 @@ namespace Cinemation.Core.Indexers.Torrent
     public abstract class TorrentIndexer
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        
+
         protected TorrentIndexer(string name, bool enabled = true)
         {
-            Name = name;
+            IndexerName = name;
             Enabled = enabled;
             HttpClient = new HttpClient();
+            Configuration = new IndexerConfigurator();
+            IndexerMetaData = new IndexerMetaData
+            {
+                Name = name
+            };
+
+            Initialize();
         }
 
-        public string Name { get; }
+        public string IndexerName { get; }
 
         public bool Enabled { get; }
 
-        public HttpClient HttpClient;
+        protected HttpClient HttpClient { get; }
 
-        public Task<List<TorrentData>> SearchByMovieTitle(string query)
+        protected IndexerConfigurator Configuration { get; }
+
+        private IndexerMetaData IndexerMetaData { get; }
+
+        /// <summary>
+        ///     Should only be called from the constructor once.
+        /// </summary>
+        private void Initialize()
         {
-            return SearchAsync(new SearchData
-            {
-                MovieName = WebUtility.UrlEncode(query)
-            });
+            Configure(Configuration);
         }
 
-        private async Task<List<TorrentData>> SearchAsync(SearchData searchData)
+        protected abstract void Configure(IndexerConfigurator config);
+
+        public async Task<List<TorrentData>> SearchAsync(SearchData searchData)
         {
             if (Logger.IsDebugEnabled)
-                Logger.Debug($"[{Name}]: Searching '{searchData.MovieName}'.");
+                Logger.Debug($"[{IndexerName}]: Searching '{searchData.MovieName}'.");
 
             var stopwatch = Stopwatch.StartNew();
             var result = new List<TorrentData>(0);
@@ -44,14 +56,15 @@ namespace Cinemation.Core.Indexers.Torrent
             try
             {
                 result = await PerformSearchAsync(searchData);
+                result.ForEach(x => x.IndexerMetaData = IndexerMetaData);
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, $"[{Name}]: Threw an exception while performing a search.");
+                Logger.Error(ex, $"[{IndexerName}]: Threw an exception while performing a search.");
             }
 
             if (Logger.IsDebugEnabled)
-                Logger.Debug($"[{Name}]: Found '{result.Count}' torrents in {stopwatch.ElapsedMilliseconds}ms.");
+                Logger.Debug($"[{IndexerName}]: Found '{result.Count}' torrents in {stopwatch.ElapsedMilliseconds}ms.");
 
             return result;
         }
