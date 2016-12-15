@@ -29,9 +29,9 @@ namespace Cinemation.Core.Debug
         {
             await Indexer.SearchTorrents(new SearchData
             {
-                MovieName = "The Fast and the Furious",
-                MovieYear = 2001,
-                ImdbCode = "tt0232500"
+                MovieName = "Guardians of the Galaxy",
+                MovieYear = 2014,
+                ImdbCode = "tt2015381"
             });
 
             await Indexer.SearchTorrents(new SearchData

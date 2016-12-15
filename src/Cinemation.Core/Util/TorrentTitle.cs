@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cinemation.Core.Util.Parser;
 
 namespace Cinemation.Core.Util
 {
@@ -21,7 +22,11 @@ namespace Cinemation.Core.Util
 
         public string MovieTitle { get; set; }
 
-        public int? MovieYear { get; set; }
+        private string Title { get; set; }
+
+        public string MovieYear { get; set; }
+
+        public bool Is3D = false;
 
         public string VideoResolution { get; set; }
 
@@ -46,7 +51,7 @@ namespace Cinemation.Core.Util
             };
 
             if (MovieYear != null)
-                titleParts.Add(MovieYear.ToString());
+                titleParts.Add(MovieYear);
 
             if (!string.IsNullOrEmpty(VideoResolution))
                 titleParts.Add(VideoResolution);
@@ -63,10 +68,30 @@ namespace Cinemation.Core.Util
             if (!string.IsNullOrEmpty(VideoEncoding))
                 titleParts.Add(VideoEncoding);
 
+            if (Is3D)
+                titleParts.Add("3D");
+
             if (!string.IsNullOrEmpty(Group))
                 titleParts[titleParts.Count - 1] += $"-{Group}";
 
             return string.Join(".", titleParts);
+        }
+        
+        public TorrentTitle(string Title, string SearchTitle)
+        {
+            SearchTitle = SearchTitle.Replace("+", ".");
+            string NormalizedTitle = Title.Replace(" ", ".");
+            string NormalizedSearchTitle = SearchTitle.Replace(" ", ".");
+            if (!NormalizedTitle.Contains(NormalizedSearchTitle))
+            {
+                this.MovieTitle = "ERROR"; // TODO: Improved error handling
+                return;
+            }
+
+            this.MovieTitle = SearchTitle;
+            string TorrentInfo = NormalizedTitle.Replace(NormalizedSearchTitle, "");
+            this.Is3D = TitleParser.Is3D(TorrentInfo);
+            this.MovieYear = TitleParser.GetYear(TorrentInfo);
         }
 
     }

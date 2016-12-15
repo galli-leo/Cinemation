@@ -43,15 +43,8 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
                     torrents.Select(torrent => new TorrentData
                         {
                             Title = new TorrentTitle
-                            {
-                                MovieTitle = movie.Value<string>("title"),
-                                MovieYear = movie.Value<int>("year"),
-                                VideoResolution = torrent.Value<string>("quality"),
-                                VideoSource = "BluRay",
-                                AudioChannel = "2.0",
-                                AudioCodec = "AAC",
-                                Group = "YTS"
-                            }.GetTitle(),
+                            (movie.Value<string>("title"), searchData.MovieName
+                            ).GetTitle(),
                             Magnet = GetMagnetUri(torrent.Value<string>("hash"), movie.Value<string>("title_long")),
                             Seeds = torrent.Value<int>("seeds"),
                             Peers = torrent.Value<int>("peers"),

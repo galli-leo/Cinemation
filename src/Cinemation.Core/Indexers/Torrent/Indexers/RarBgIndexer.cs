@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Cinemation.Core.Util;
 
 namespace Cinemation.Core.Indexers.Torrent.Indexers
 {
@@ -42,7 +44,7 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
             torrentsData.AddRange(
                 torrents.Select(torrent => new TorrentData
                     {
-                        Title = torrent.Value<string>("title"),
+                        Title = new TorrentTitle(torrent.Value<string>("title"), searchData.MovieName.Replace("+", " ")).GetTitle(),
                         Magnet = torrent.Value<string>("download"),
                         Seeds = torrent.Value<int>("seeders"),
                         Size = torrent.Value<long>("size")

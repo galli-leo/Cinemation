@@ -14,7 +14,7 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
         private string EndpointMovies = "http://127.0.0.1:9117/potato/privatehd";
         private string APIKey = "vu5gdo460fvooqhlf58nqvjxmgaxma8v";
 
-        public TorrentPotatoIndexer() : base("TorrentPotato")
+        public TorrentPotatoIndexer() : base("TorrentPotato", false)
         {
         }
 
@@ -42,16 +42,7 @@ namespace Cinemation.Core.Indexers.Torrent.Indexers
 
                 torrentsData.Add( new TorrentData
                         {
-                            Title = new TorrentTitle
-                            {
-                                MovieTitle = movie.Value<string>("release_name"),
-                                MovieYear = 1999,
-                                VideoResolution = "",
-                                VideoSource = "BluRay",
-                                AudioChannel = "2.0",
-                                AudioCodec = "AAC",
-                                Group = "YTS"
-                            }.GetTitle(),
+                            Title = new TorrentTitle(movie.Value<string>("release_name"), searchData.MovieName).GetTitle(),
                             Magnet = downloadURL.ToString(),
                             Seeds = movie.Value<int>("seeders"),
                             Peers = movie.Value<int>("leechers"),
